@@ -1,1 +1,84 @@
-<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Valentine's Gloo</title>\n    <style>\n        body {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            flex-direction: column;\n            height: 100vh;\n            background-color: #ffebcd;\n            font-family: Arial, sans-serif;\n        }\n        .button {\n            margin: 10px;\n            padding: 10px 20px;\n            font-size: 20px;\n            cursor: pointer;\n            border: none;\n            border-radius: 5px;\n            transition: background-color 0.3s;\n        }\n        .yes {\n            background-color: #ff69b4;\n        }\n        .no {\n            background-color: #ff4500;\n        }\n        .heart {\n            position: absolute;\n            top: -50px;\n            animation: float 8s ease-in infinite;\n        }\n        @keyframes float {\n            0% {\n                transform: translateY(0);\n            }\n            50% {\n                transform: translateY(-30px);\n            }\n            100% {\n                transform: translateY(0);\n            }\n        }\n    </style>\n</head>\n<body>\n    <div>\n        <h1>Vivi, Can I Be Your Gloo Forever?</h1>\n        <button class=\"button yes\" onclick=\"displayMessage('yes')\">YES</button>\n        <button class=\"button no\" onclick=\"displayMessage('no')\">NO</button>\n        <p id=\"message\"></p>\n    </div>\n    <img src=\"https://example.com/heart.png\" alt=\"Heart\" class=\"heart\">\n    <script>\n        function displayMessage(response) {\n            const messageElement = document.getElementById('message');\n            if (response === 'yes') {\n                messageElement.textContent = 'Yay! Let\'s Gloo together!';\n            } else {\n                messageElement.textContent = 'That\'s okay, I\'ll keep Glooing on!';\n            }\n        }\n    </script>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gloo Valentine's Page</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            margin-top: 50px;
+            color: #240046;
+        }
+        #yes-button, #no-button {
+            margin: 20px;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #yes-button {
+            background-color: #00A8E1;
+        }
+        #no-button {
+            background-color: #FF6A6A;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 192, 203, 0.8);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 5s infinite;
+        }
+        @keyframes float {
+            0% {transform: translate(-50%, 0);} 
+            50% {transform: translate(-50%, -50px);} 
+            100% {transform: translate(-50%, 0);} 
+        }
+    </style>
+</head>
+<body>
+    <h1>Can I Be Your Gloo Forever?</h1>
+    <img src="your_gloo_gif_url_here.gif" alt="Gloo GIF" width="300">
+    <div>
+        <button id="yes-button">YES!</button>
+        <button id="no-button">NO!</button>
+    </div>
+    <script>
+        document.getElementById('yes-button').onclick = function() {
+            alert('🎉 Celebrate Gloo Love! 🎉');
+            // Add celebration logic here
+        };
+        document.getElementById('no-button').onclick = function() {
+            const messages = [
+                "Vivi… support me please? 🥺",
+                "Without you, I'm just a gel blob 😢",
+                "We're the perfect duo! 💔",
+                "Don't leave your support hero! 😭",
+                "Gloo needs you, Vivi! 😩"
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMessage);
+        };
+
+        // Create floating hearts
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            document.body.appendChild(heart);
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 10 + 's';
+            heart.style.opacity = Math.random();
+        }
+    </script>
+</body>
+</html>
