@@ -3,29 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vivi x Gloo Forever</title>
+<title>Vivi x Gloo</title>
 
 <style>
 body{
 margin:0;
-padding:0;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(-45deg,#10002b,#240046,#3c096c,#5a189a);
-background-size:400% 400%;
-animation:bgMove 12s ease infinite;
+background:#240046;
 font-family:Arial, sans-serif;
 color:white;
 text-align:center;
-overflow:hidden;
 }
 
-@keyframes bgMove{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+.container{
+padding:20px;
+}
+
+h1{
+margin-bottom:30px;
+}
+
+button{
+padding:12px 25px;
+font-size:16px;
+border:none;
+border-radius:25px;
+cursor:pointer;
+margin:10px;
+}
+
+#yesBtn{
+background:#ffd60a;
+color:black;
+}
+
+#noBtn{
+background:#5a189a;
+color:white;
+position:relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1 id="question">Vivi… can I be your Gloo forever? 💜</h1>
+
+<button id="yesBtn">YES 💜</button>
+<button id="noBtn">NO 😢</button>
+</div>
+
+<script>
+var noBtn = document.getElementById("noBtn");
+var yesBtn = document.getElementById("yesBtn");
+var question = document.getElementById("question");
+
+var clickCount = 0;
+
+noBtn.onclick = function(){
+
+if(clickCount === 0){
+question.innerHTML = "Are we not Gloo? 🥹";
+clickCount++;
+} else {
+question.innerHTML = "You can't escape Gloo 💜";
+}
+
+noBtn.style.position = "absolute";
+noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+noBtn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+};
+
+yesBtn.onclick = function(){
+question.innerHTML = "Vivi 💜 You're officially stuck with your Gloo forever!";
+noBtn.style.display = "none";
+yesBtn.style.display = "none";
+};
+</script>
+
+</body>
+</html>
 }
 
 .container{
