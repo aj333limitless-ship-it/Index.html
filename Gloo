@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivi, Can I Be Your Gloo Forever?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #0099ff, #66ccff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 20px 0;
+        }
+
+        img {
+            width: 280px;
+            margin: 20px 0;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 40px;
+            margin: 15px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-weight: 600;
+        }
+
+        #yesBtn {
+            background-color: #00ff00;
+            color: #000;
+            box-shadow: 0 4px 8px rgba(0,255,0,0.4);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,255,0,0.6);
+        }
+
+        #noBtn {
+            background-color: #ff4444;
+            color: white;
+            position: relative;
+        }
+
+        #noBtn:hover {
+            background-color: #ff2222;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: floatUp 3s linear forwards;
+            z-index: 5;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-300px); opacity: 0; }
+        }
+
+        .celebration {
+            animation: pop 0.5s ease forwards;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .message-box {
+            background-color: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 15;
+            min-height: 40px;
+        }
+
+        .message-box p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            color: #0099ff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1 id="mainText">Vivi, Can I Be Your Gloo Forever? 💙</h1>
+
+    <!-- Gloo GIF from GIPHY -->
+    <img id="gif" src="https://media.giphy.com/media/3o7TKqInJCfq9GmHAI/giphy.gif" alt="Gloo">
+
+    <div class="message-box" id="messageBox">
+        <p id="rejectionMessage"></p>
+    </div>
+
+    <div class="buttons">
+        <button id="yesBtn">YES 💖</button>
+        <button id="noBtn">NO 😢</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const gif = document.getElementById("gif");
+const mainText = document.getElementById("mainText");
+const messageBox = document.getElementById("messageBox");
+const rejectionMessage = document.getElementById("rejectionMessage");
+
+const noMessages = [
+    "Vivi… support me please? 🥺",
+    "Without you, I'm just a gel blob 😢",
+    "We're the perfect duo! 💔",
+    "Don't leave your support hero! 😭",
+    "Gloo needs you, Vivi! 😩"
+];
+
+let messageIndex = 0;
+let yesScale = 1;
+
+function moveButton() {
+    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+
+    if (messageIndex < noMessages.length) {
+        rejectionMessage.textContent = noMessages[messageIndex];
+        messageBox.style.display = "block";
+        messageIndex++;
+    }
+
+    // Make YES button bigger each time
+    yesScale += 0.2;
+    yesBtn.style.transform = `scale(${yesScale})`;
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
+
+yesBtn.addEventListener("click", () => {
+    mainText.textContent = "YAYYYY! 💙 You just became my permanent support, Vivi!!!";
+    gif.src = "https://media.giphy.com/media/3o7TKqInJCfq9GmHAI/giphy.gif";
+    noBtn.style.display = "none";
+    yesBtn.style.display = "none";
+    messageBox.style.display = "none";
+    gif.classList.add("celebration");
+
+    createHearts();
+});
+
+function createHearts() {
+    for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💙";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        heart.style.fontSize = (Math.random() * 30 + 30) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+    }
+}
+</script>
+
+</body>
+</html>
