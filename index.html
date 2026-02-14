@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivi, Be My Valentine?</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffd6e8, #ffe6f2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    padding: 20px;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: #ff4d88;
+}
+
+img {
+    width: 250px;
+    margin: 20px 0;
+    border-radius: 20px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    padding: 12px 30px;
+    margin: 10px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#yesBtn {
+    background-color: #ff4d88;
+    color: white;
+}
+
+#noBtn {
+    background-color: #cccccc;
+    color: black;
+    position: relative;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp 3s linear forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-200px); opacity: 0; }
+}
+
+.celebration {
+    animation: pop 0.5s ease forwards;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1 id="mainText">Vivi, will you be my Valentine? ❤️</h1>
+
+    <!-- Replace with your chosen begging puppy GIF -->
+    <img id="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+
+    <div class="buttons">
+        <button id="yesBtn">YES 💖</button>
+        <button id="noBtn">NO 😢</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const gif = document.getElementById("gif");
+const mainText = document.getElementById("mainText");
+
+const noMessages = [
+    "Vivi… are you sure? 🥺",
+    "Really sure?? 😢",
+    "Think again my love 💔",
+    "Don't break my heart Vivi 😭",
+    "Last chance!!! 😩"
+];
+
+let messageIndex = 0;
+let yesScale = 1;
+
+function moveButton() {
+    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+
+    if (messageIndex < noMessages.length) {
+        mainText.textContent = noMessages[messageIndex];
+        messageIndex++;
+    }
+
+    // Make YES button bigger each time
+    yesScale += 0.2;
+    yesBtn.style.transform = `scale(${yesScale})`;
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
+
+yesBtn.addEventListener("click", () => {
+    mainText.textContent = "YAYYYY ❤️ You just made me the happiest, Vivi!!!";
+    gif.src = "https://media.giphy.com/media/111ebonMs90YLu/giphy.gif";
+    noBtn.style.display = "none";
+    yesBtn.style.display = "none";
+    gif.classList.add("celebration");
+
+    createHearts();
+});
+
+function createHearts() {
+    for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = Math.random() * window.innerHeight + "px";
+        heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+    }
+}
+</script>
+
+</body>
+</html>
